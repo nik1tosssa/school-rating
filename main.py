@@ -1,21 +1,46 @@
-import telegram
-from telegram.ext import Updater, CommandHandler
+import telebot
+from telebot import types
 
-# Вставьте сюда ваш токен API
+# Ваш токен, полученный от BotFather
 TOKEN = '7730686653:AAGPAka_brixx23dXCxoK3VFjyFDx83ICfk'
 
-def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Привет! Я ваш новый бот.")
+bot = telebot.TeleBot(TOKEN)
 
-def main():
-    updater = Updater(token=TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
+# Обработчик команды /start
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 
-    start_handler = CommandHandler('start', start)
-    dispatcher.add_handler(start_handler)
+    clear_button = types.InlineKeyboardButton("Очистить чат", callback_data="clear_chat") 
+    markup.add(clear_button) 
 
-    updater.start_polling()
-    updater.idle()
 
-if __name__ == '__main__':
-    main()
+    btn1 = types.KeyboardButton("clear all")
+    btn2 = types.KeyboardButton("Кнопка 2")
+    btn3 = types.KeyboardButton("Кнопка 3")
+    markup.add(btn1, btn2, btn3)
+    bot.send_message(message.chat.id, "Привет! Выберите одну из опций:", reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: call.data == "clear_chat")
+def clear_chat(call): 
+    # Удаляем все сообщения в чате 
+    bot.delete_message(call.message.chat.id, call.message.message_id) 
+    #bot.send_message(call.message.chat.id, "Чат очищен!")
+
+    
+# Обработчик нажатий на кнопки
+@bot.message_handler(func=lambda message: True)
+def handle_buttons(message):
+    if message.text == "clear all":
+        clear_chat()
+    elif message.text == "Кнопка 2":
+        bot.reply_to(message, "Вы нажали на кнопку 2")
+    elif message.text == "Кнопка 3":
+        bot.reply_to(message, "Вы нажали на кнопку 3")
+    else:
+        bot.reply_to(message, "Неизвестная команда")
+
+
+
+# Запуск бота
+bot.polling()
