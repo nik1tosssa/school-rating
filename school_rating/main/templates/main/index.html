@@ -1,9 +1,27 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 
-{% block title%}
-    Index page
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/css/index.css' %}">
 {% endblock %}
 
-{% block content%}
-    <h1>Index page</h1>
+{% block title %}
+Главная
+{% endblock %}
+
+{% block content %}
+{% for i in my_list %}
+<div class="news-card">
+    <div class="preview"></div>
+    <div class="info">
+        <div class="title">Новый сайт {{i}}</div>
+        <div class="text">Много текста про новый сайт</div>
+        <div class="more">
+            <a class="news-button" href="">
+                Подробнее
+            </a>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}

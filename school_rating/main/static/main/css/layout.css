@@ -1,0 +1,75 @@
+body {
+    margin: 0px;
+    background-color: #a5a5a5;
+}
+a{
+    color:bisque;
+}
+main{
+    display:flex;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    flex: 70%;
+    border-right: black;
+    border-right-style: solid;
+    margin: auto;
+}
+
+.news-bar{
+    flex: 30%;
+}
+
+.top-bar {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    
+    background-color: #3352dd;
+}
+.nav-button {
+    text-decoration: none;
+}
+
+span {
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.top-bar-button {
+    padding: 15px;
+    align-content: center;
+    transition: 0.3s;
+}
+
+.top-bar-button:hover {
+    background-color: #1833ac;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+footer {
+    background-color: #3352dd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+    color:bisque;
+}
+
+.social-link {
+    text-decoration: none;
+    font-family: "Montserrat", serif;
+}
+
+.in-footer{
+    margin: auto;
+}
